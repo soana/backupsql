@@ -1,0 +1,1 @@
+MINUTE HOUR DAYM MONTH DAYW /config/cronjob &> /dev/null
