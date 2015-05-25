@@ -64,7 +64,7 @@ Number of backup copies&#13;
   </Data>
   <Version>27eb8e69</Version>
   <WebUI></WebUI>
-  <Banner>https://raw.githubusercontent.com/soana/bkpsqldb/master/banner.png</Banner>
-  <Icon>https://raw.githubusercontent.com/soana/bkpsqldb/master/icon.png</Icon>
+  <Banner>https://raw.githubusercontent.com/soana/BackupSQL/master/banner.png</Banner>
+  <Icon>https://raw.githubusercontent.com/soana/BackupSQL/master/icon.png</Icon>
   <ExtraParams></ExtraParams>
 </Container>
