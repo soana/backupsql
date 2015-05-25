@@ -1,0 +1,12 @@
+#!/bin/bash
+
+mysqldump -u root -h MySQLIP --all-databases | gzip > /backup/MyDatabase_$(date +%Y-%m-%d).sql.gz
+
+##Delete files "My*" older than BACKUPCOPIES days
+find /backup/My* -mtime +BACKUPCOPIES -exec rm {} \;
+
+DATE=$(date)
+   curl -s -k -X POST --header "Authorization: Bearer TOKEN" \
+   --header  'Content-Type: application/json' \
+   -d "{\"type\": \"note\", \"title\": \"MySQL Backup complete\", \"body\": \"$DATE\"}" \
+   https://api.pushbullet.com/v2/pushes
