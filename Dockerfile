@@ -32,7 +32,7 @@ ADD firstrun.sh /etc/my_init.d/firstrun.sh
 RUN chmod +x /etc/my_init.d/firstrun.sh
 RUN /etc/my_init.d/firstrun.sh
 
-#RUN cat /config/crontab.txt
+RUN cat /config/crontab.txt
 
 #Use the crontab file
 #RUN crontab /config/crontab.txt
