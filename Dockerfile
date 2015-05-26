@@ -35,7 +35,7 @@ RUN /etc/my_init.d/firstrun.sh
 #RUN cat /config/crontab.txt
 
 #Use the crontab file
-RUN crontab /config/crontab.txt
+#RUN crontab /config/crontab.txt
 
 # Start cron
-RUN cron
+#RUN cron
