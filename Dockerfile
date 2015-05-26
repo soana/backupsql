@@ -27,15 +27,27 @@ ADD cronjob /config/cronjob
 # Make cronjob executable
 RUN chmod +x /config/cronjob
 
-# Add firstrun.sh to execute during container startup, changes mysql host settings.
-ADD firstrun.sh /etc/my_init.d/firstrun.sh
-RUN chmod +x /etc/my_init.d/firstrun.sh
-RUN /etc/my_init.d/firstrun.sh
+## Add firstrun.sh to execute during container startup, changes mysql host settings.
+#ADD firstrun.sh /etc/my_init.d/firstrun.sh
+#RUN chmod +x /etc/my_init.d/firstrun.sh
+#RUN /etc/my_init.d/firstrun.sh
+
+#Edit cronjob file
+RUN sed -i "s/MySQLIP/${MySQLIP}/" /config/cronjob
+RUN sed -i "s/TOKEN/${TOKEN}/" /config/cronjob
+RUN sed -i "s/BACKUPCOPIES/${BackupCopies}/" /config/cronjob
+
+#Edit crontab.txt file
+RUN sed -i "s/MINUTE/${bkpMinute}/" /config/crontab.txt
+RUN sed -i "s/HOUR/${bkpHour}/" /config/crontab.txt
+RUN sed -i "s/DAYM/${bkpDayOfMonth}/" /config/crontab.txt
+RUN sed -i "s/MONTH/${bkpMonth}/" /config/crontab.txt
+RUN sed -i "s/DAYW/${bkpDayOfWeek}/" /config/crontab.txt
 
 RUN cat /config/crontab.txt
 
 #Use the crontab file
-#RUN crontab /config/crontab.txt
+RUN crontab /config/crontab.txt
 
 # Start cron
-#RUN cron
+RUN cron
