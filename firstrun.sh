@@ -12,4 +12,3 @@ sed -i "s/MONTH/${bkpMonth}/" /config/crontab.txt
 sed -i "s/DAYW/${bkpDayOfWeek}/" /config/crontab.txt
 
 crontab /config/crontab.txt
-cron
