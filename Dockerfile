@@ -17,7 +17,7 @@ RUN mkdir /config
 RUN mkdir /backup
 
 VOLUME /backup
-VOLUME /config
+#VOLUME /config
 
 # Add our crontab file
 ADD crontab.txt /config/crontab.txt
@@ -29,12 +29,3 @@ RUN chmod +x /config/cronjob
 # Add firstrun.sh to execute during container startup, changes mysql host settings.
 ADD firstrun.sh /etc/my_init.d/firstrun.sh
 RUN chmod +x /etc/my_init.d/firstrun.sh
-
-
-#RUN cat /config/crontab.txt
-
-#Use the crontab file
-#RUN crontab /config/crontab.txt
-
-# Start cron
-#RUN cron
