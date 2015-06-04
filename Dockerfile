@@ -17,7 +17,6 @@ RUN mkdir /config
 RUN mkdir /backup
 
 VOLUME /backup
-#VOLUME /config
 
 # Add our crontab file
 ADD crontab.txt /config/crontab.txt

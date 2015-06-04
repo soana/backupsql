@@ -19,19 +19,16 @@ else
    https://api.pushbullet.com/v2/pushes;
 fi
 
-## Send a pushbullet message
-#   curl -s -k -X POST --header "Authorization: Bearer TOKEN" \
-#   --header  'Content-Type: application/json' \
-#   -d "{\"type\": \"note\", \"title\": \"MySQL Backup complete\", \"body\": \"$DATE\"}" \
-#   https://api.pushbullet.com/v2/pushes
-   
-   
 
 ##Delete files "My*" older than BACKUPCOPIES days
 find /backup/My* -mtime +BACKUPCOPIES -exec rm {} \;
 
    
 #restore databases   
-# gunzip < [backupfile.sql.gz] | mysql -u [uname] -p[pass] [dbname]
-# mysql -u [uname] -p[pass] [db_to_restore] < [backupfile.sql]
-# mysql -u root -p Tutorials < tut_backup.sql
+# gunzip < MyDatabase_2015-06-04.sql.gz | mysql -uroot -h 192.168.0.40
+
+
+#https://github.com/dockerfile/mariadb/issues/3
+#TERM env variable
+
+
