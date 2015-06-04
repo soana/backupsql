@@ -2,7 +2,6 @@
 #Edit cronjob file
 sed -i "s/MySQLIP/${MySQLIP}/" /config/cronjob
 sed -i "s/SQL_userid/${SQL_userid}/" /config/cronjob
-# sed -i "s/SQL_password/${SQL_password}/" /config/cronjob
 sed -i "s/TOKEN/${TOKEN}/" /config/cronjob
 sed -i "s/BACKUPCOPIES/${BackupCopies}/" /config/cronjob
 
