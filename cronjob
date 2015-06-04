@@ -5,10 +5,18 @@ mysqldump -u SQL_userid -h MySQLIP --all-databases | gzip > /backup/MyDatabase_$
 #http://scratching.psybermonkey.net/2011/01/bash-how-to-check-exit-status-of-pipe.html
 if [ ${PIPESTATUS[0]} -ne "0" ];
 then
-    echo "the command \"mysqldump\" failed with Error: ${PIPESTATUS[0]}";
-    exit 1;
+    #echo "the command \"mysqldump\" failed with Error: ${PIPESTATUS[0]}";
+    #exit 1;
+   curl -s -k -X POST --header "Authorization: Bearer TOKEN" \
+   --header  'Content-Type: application/json' \
+   -d "{\"type\": \"note\", \"title\": \"MySQL Backup failed with error: ${PIPESTATUS[0]}\", \"body\": \"$DATE\"}" \
+   https://api.pushbullet.com/v2/pushes;
+   exit 1;   
 else
-    echo "Database dump successfully!";
+   curl -s -k -X POST --header "Authorization: Bearer TOKEN" \
+   --header  'Content-Type: application/json' \
+   -d "{\"type\": \"note\", \"title\": \"MySQL Backup complete\", \"body\": \"$DATE\"}" \
+   https://api.pushbullet.com/v2/pushes;
 fi
 
 ## Send a pushbullet message
