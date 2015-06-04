@@ -1,12 +1,30 @@
 #!/bin/bash
+DATE=$(date)
+#mysqldump -u SQL_userid -p SQL_password -h MySQLIP --all-databases | gzip > /backup/MyDatabase_$(date +%Y-%m-%d).sql.gz
+mysqldump -u SQL_userid -h MySQLIP --all-databases | gzip > /backup/MyDatabase_$(date +%Y-%m-%d).sql.gz
 
-mysqldump -u root -h MySQLIP --all-databases | gzip > /backup/MyDatabase_$(date +%Y-%m-%d).sql.gz
+#http://scratching.psybermonkey.net/2011/01/bash-how-to-check-exit-status-of-pipe.html
+if [ ${PIPESTATUS[0]} -ne "0" ];
+then
+    echo "the command \"mysqldump\" failed with Error: ${PIPESTATUS[0]}";
+    exit 1;
+else
+    echo "Database dump successfully!";
+fi
+
+## Send a pushbullet message
+#   curl -s -k -X POST --header "Authorization: Bearer TOKEN" \
+#   --header  'Content-Type: application/json' \
+#   -d "{\"type\": \"note\", \"title\": \"MySQL Backup complete\", \"body\": \"$DATE\"}" \
+#   https://api.pushbullet.com/v2/pushes
+   
+   
 
 ##Delete files "My*" older than BACKUPCOPIES days
 find /backup/My* -mtime +BACKUPCOPIES -exec rm {} \;
 
-DATE=$(date)
-   curl -s -k -X POST --header "Authorization: Bearer TOKEN" \
-   --header  'Content-Type: application/json' \
-   -d "{\"type\": \"note\", \"title\": \"MySQL Backup complete\", \"body\": \"$DATE\"}" \
-   https://api.pushbullet.com/v2/pushes
+   
+#restore databases   
+# gunzip < [backupfile.sql.gz] | mysql -u [uname] -p[pass] [dbname]
+# mysql -u [uname] -p[pass] [db_to_restore] < [backupfile.sql]
+# mysql -u root -p Tutorials < tut_backup.sql
