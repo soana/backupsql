@@ -1,3 +1,3 @@
 # BackupSQL
 unRaid docker to backup KODI SQL database
-Version 0.1
+Version 0.2
