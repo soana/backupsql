@@ -1,6 +1,6 @@
 #!/bin/bash
 DATE=$(date)
-mysqldump -u SQL_userid -p SQL_pwd -h MySQLIP --all-databases | gzip > /backup/MyDatabase_$(date +%Y-%m-%d).sql.gz
+mysqldump -uSQL_userid -pSQL_pwd -hMySQLIP --all-databases | gzip > /backup/MyDatabase_$(date +%Y-%m-%d).sql.gz
 
 #http://scratching.psybermonkey.net/2011/01/bash-how-to-check-exit-status-of-pipe.html
 if [ ${PIPESTATUS[0]} -ne "0" ];
